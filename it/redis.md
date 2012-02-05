@@ -48,36 +48,62 @@ Il più recente sorgente di questo libro è disponibile a:
 
 Over the last couple years, the techniques and tools used for persisting and querying data have grown at an incredible pace. While it's safe to say that relational databases aren't going anywhere, we can also say that the ecosystem around data is never going to be the same.
 
+Negli ultimi due anni, gli strumenti e le tecniche per persistere ed interrogare una base dati sono cresciute ad un passo incredibile. Mentre non è saggio affermare che i database relazionali non stiano andando da nessuna parte, possiamo anche dire che l'ecosistema attorno ai dati non sarà più lo stesso.
+
 Of all the new tools and solutions, for me, Redis has been the most exciting. Why? First because it's unbelievably easy to learn. Hours is the right unit to use when talking about length of time it takes to get comfortable with Redis. Secondly, it solves a specific set of problems while at the same time being quite generic. What exactly does that mean? Redis doesn't try to be all things to all data. As you get to know Redis, it'll become increasingly evident what does and what does not belong in it. And when it does, as a developer, it's a great experience.
+
+Di tutti i nuovi strumenti e soluzioni, per me, Redis è la più stimolante. Perché? In primo luogo perché è incredibilmente semplice da imparare. 
+Quando si parla del tempo necessario per iniziare a muovere i primi passi con Redis si parla di ore. In secondo luogo, risolve uno specifico insieme di problemi rimanendo allo stesso tempo abbastanza generico. Cosa significa questo esattamente? Redis non cerca di essere tutte le cose per tutti i dati... Più approfondirete la conoscenza di Redis, più diventerà via via più evidente cosa fa e cosa non vi appartiene. And when it does, as a developer, it's a great experience.
 
 While you can build a complete system using Redis only, I think most people will find that it supplements their more generic data solution - whether that be a traditional relational database, a document-oriented system, or something else. It's the kind of solution you use to implement specific features. In that way, it's similar to an indexing engine. You wouldn't build your entire application on Lucene. But when you need good search, it's a much better experience - for both you and your users. Of course, the similarities between Redis and indexing engines end there.
 
+Anche se si può costruire un sistema completo usando solamente Redis, penso che la maggior parte delle persone troverà che esso integra le loro più generiche soluzioni dati - sia che si tratti di un tradizionale database relazionale, un sistema orientato ai documenti, o qualcos'altro. E' il tipo di soluzione che si usa per implementare funzionalità specifiche. In questo modo, è simile ad un motore di indicizzazione. Non si costruirebbe un'intera applicazione su Lucene. Ma quando hai bisogno di una buona funzione di ricerca, usare Lucene è un'esperienza molto migliore - sia per voi che per i vostri utenti. 
+
+
 The goal of this book is to build the foundation you'll need to master Redis. We'll focus on learning Redis' five data structures and look at various data modeling approaches. We'll also touch on some key administrative details and debugging techniques.
 
-## Getting Started
+Lo scopo di questo libro è costruire le basi di cui avrete bisogno per possedere una buona conoscenza di Redis. Ci focalizzeremo sullo studiare le cinque strutture dati di Redis ed esamineremo i diversi approcci alla modellazione dati. Daremo anche alcuni elementi riguardo alcuni dettagli amministrativi e tecniche di debug chiave. 
+
+## Per iniziare
 
 We all learn differently: some like to get their hands dirty, some like to watch videos, and some like to read. Nothing will help you understand Redis more than actually experiencing it. Redis is easy to install and comes with a simple shell that'll give us everything we need. Let's take a couple minutes and get it up and running on our machine.
 
-### On Windows
+Tutti noi impariamo in modo differente: a qualcuno piace sporcarsi le mani, altri preferiscono guardare dei video, e ad altri piace leggere. Nulla vi aiuterà a capire Redis se non sperimentarlo direttamente. Redis è facile da installare e ha con sé una semplice shell che ci darà tutto ciò che ci serve. Prendiamoci un paio di minuti ed installiamolo sulla nostra macchina. 
+
+### Su Windows
 
 Redis doesn't officially support Windows, but there are options available. You wouldn't run these in production, but I've never experienced any limitations while doing development.
 
+Redis non supporta ufficialmente Windows, ma c'è qualche opzione disponibile. Non sarebbe il caso di far girare queste soluzioni in produzione, ma non ho mai sperimentato alcuna limitazione nello sviluppo. 
+
 First head over to <https://github.com/dmajkic/redis/downloads> and download the most up to date version (which should be at the top of the list).
+
+Per prima cosa dirigetevi a <https://github.com/dmajkic/redis/downloads> e scaricate la versione più recente (che dovrebbe essere in cima alla lista). 
 
 Extract the zip file and, based on your architecture, open either the `64bit` or `32bit` folder.
 
-### On *nix and MacOSX
+Estraete il file zip e, sulla base della vostra architettura, aprite la cartella `64bit` o la cartella `32bit`. 
+
+### Su *nix e MacOSX
 
 For *nix and and Mac users, building it from source is your best option. The instructions, along with the latest version number, are available at <http://redis.io/download>. At the time of this writing the latest version is 2.4.6; to install this version we would execute:
+
+Per utenti *nix e mac, la miglior scelta è compilarlo dai sorgenti. Le istruzioni, così come l'ultimo numero di versione, sono disponibili su <http://redis.io/download>. Ad oggi l'ultima versione è 2.4.6; per installare questa versione eseguiremmo: 
 
 	wget http://redis.googlecode.com/files/redis-2.4.6.tar.gz
 	tar xzf redis-2.4.6.tar.gz
 	cd redis-2.4.6
 	make
 
+	
+	
 (Alternatively, Redis is available via various package managers. For example, MacOSX users with Homebrew installed can simply type `brew install redis`.)
 
+(In alternativa, Redis è disponibile attraverso diversi package managers. Per esempio, gli utenti MacOSX con installato Homebrew possono semplicemente digitare `brew install redis`.)
+
 If you built it from source, the binary outputs have been placed in the `src` directory. Navigate to the `src` directory by executing `cd src`.
+
+Se avete compilato dai sorgenti, gli output binari sono stati posti nella cartella `src`. Navigate nella cartella `src` eseguendo `cd src`. 
 
 ### Running and Connecting to Redis
 
